@@ -1,6 +1,7 @@
 import express from 'express';
 import conectaNaDatabase from './config/dbConnect.js';
-import livro from './models/livro.js';
+//import livro from './models/livro.js';
+import routes from  './routes/index.js';
 
 
 const conexao = await conectaNaDatabase();
@@ -14,7 +15,8 @@ conexao.once("open", () => {
 })
 
 const app = express();
-app.use(express.json());
+routes(app)
+//app.use(express.json());
 
 /* const livros = [
     {
@@ -33,9 +35,9 @@ app.use(express.json());
     })
 } */
 
-app.get("/", (req, res) => {
+/* app.get("/", (req, res) => {
     res.status(200).send("Curso de Node.js")
-});
+}); */
 
 /* app.get('/livros', async (req, res) => {
     const listaLivros = await livro.find({});
@@ -47,10 +49,10 @@ app.get("/livros/:id", (req, res) => {
     res.status(200).json(livros[index])
 })
 
-app.post('/livros', (req, res) => {
+/* app.post('/livros', (req, res) => {
     livros.push(req.body);
     res.status(201).send("Livro cadastrado com sucesso");
-});
+}); */
 
 app.put("/livros/:id", (req, res) => {
     const index = buscaLivro(req.params.id);
