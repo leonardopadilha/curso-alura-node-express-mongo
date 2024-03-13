@@ -20,6 +20,19 @@ class AutorController {
             res.status(500).json({ message: `${erro.message} - falha na requisição do autor`})
         }
     }
+
+    static async cadastrarAutor(req, res) {
+        try {
+            const novoAutor = await autor.create(req.body);
+            res.status(201)
+                    .json({
+                        message: "criado com sucesso",
+                        autor: novoAutor
+                    });
+        } catch (erro) {
+            res.status(500).json({ message: `${erro.message} - falha ao cadastrar autor`})
+        }
+    }
 };
 
 export default AutorController;
